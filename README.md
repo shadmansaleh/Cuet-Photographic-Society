@@ -39,7 +39,7 @@ npm run dev
 
 ### Demo
 
-You can check it out at [deploment]().
+You can check it out at [deployment]().
 
 ### Screenshots
 
