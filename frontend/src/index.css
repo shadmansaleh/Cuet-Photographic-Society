@@ -1,0 +1,81 @@
+@import-normalize;
+@tailwind base;
+@tailwind components;
+
+*,
+*::before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+@layer base {
+}
+
+@layer components {
+  /* custom tailwind classes here */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .c-hover-enlarge {
+    @apply hover:scale-105 duration-200 ease-in-out transition-transform;
+  }
+
+  .c-text-xl {
+    @apply text-5xl font-bold text-center;
+  }
+  .c-text-lg {
+    @apply text-5xl font-normal text-center;
+  }
+
+  .c-text-md {
+    @apply text-xl font-semibold;
+  }
+
+  .c-text-sm {
+    @apply text-lg text-center;
+  }
+
+  .c-btn-fill {
+    @apply bg-primary text-primary-content rounded-3xl text-2xl font-light px-5 py-4 hover:bg-gray-600;
+  }
+  .c-btn-border {
+    @apply g-transparent bg-primary-content text-primary border-primary border-4 rounded-3xl text-2xl font-light px-5 py-4 hover:bg-gray-200;
+  }
+
+  .bg-base-50 {
+    @apply bg-white dark:bg-gray-700;
+  }
+  .text-base-50 {
+    @apply text-white dark:text-gray-700;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif;
+  }
+}
+
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 0.25rem;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-500 dark:bg-green-400;
+}

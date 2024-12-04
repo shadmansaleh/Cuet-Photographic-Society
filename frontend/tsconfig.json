@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    // import
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "#root/*": ["./*"],
+      "@backendtypes": ["./../backend/src/types/LocaleTypes"]
+    }
+  },
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
