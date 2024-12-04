@@ -1,0 +1,11 @@
+{
+  "name": "Cuet_Photographic_Society",
+  "version": "1.0.0",
+  "description": "A website for photographers of cuet to showcase their work",
+  "main": "index.js",
+  "scripts": {
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL3"
+}
