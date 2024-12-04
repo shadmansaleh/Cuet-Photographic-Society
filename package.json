@@ -2,10 +2,23 @@
   "name": "Cuet_Photographic_Society",
   "version": "1.0.0",
   "description": "A website for photographers of cuet to showcase their work",
-  "main": "index.js",
+  "main": "",
   "scripts": {
+    "start": "concurrently -n 'FE,BE' -k -c \"green,blue\"  \"npm run start:frontend\" \"npm run start:backend\"",
+    "start:frontend": "cd frontend && npm start",
+    "start:backend": "cd backend && npm start",
+    "dev": "concurrently -n 'FE,BE' -k -c \"green,blue\"  \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "setup": "npm install && concurrently -s all -n 'FE,BE' -c \"green,blue\"  \"npm run setup:frontend\" \"npm run setup:backend\"",
+    "setup:frontend": "cd frontend && npm install && cp .env.local.example .env.local",
+    "setup:backend": "cd backend && npm install && cp .env.example .env"
   },
   "keywords": [],
   "author": "",
-  "license": "GPL3"
+  "license": "GPL3",
+  "packageManager": "pnpm@9.14.2+sha512.6e2baf77d06b9362294152c851c4f278ede37ab1eba3a55fda317a4a17b209f4dbb973fb250a77abc463a341fcb1f17f17cfa24091c4eb319cda0d9b84278387",
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
 }
