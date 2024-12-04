@@ -49,5 +49,5 @@ You can check it out at [deployment]().
 Web project for CSE-356 (Software Engineering Sessional)
 
 - [Shadman Saleh](https://github.com/shadmansaleh) (shadmansaleh3@gmail.com)
-- [Adiba Fairooz Chowdhury]() (adibafairoozchowdhury@gmail.com)
-- [Pritha Saha]() (prithasaha2022@gmail.com)
+- [Adiba Fairooz Chowdhury](https://github.com/AdibAFC) (adibafairoozchowdhury@gmail.com)
+- [Pritha Saha](https://github.com/PrithS24) (prithasaha2022@gmail.com)
