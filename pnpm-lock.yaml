@@ -8,11 +8,17 @@ importers:
 
   .:
     devDependencies:
+      '@types/js-cookie':
+        specifier: ^3.0.6
+        version: 3.0.6
       concurrently:
         specifier: ^9.1.0
         version: 9.1.0
 
 packages:
+
+  '@types/js-cookie@3.0.6':
+    resolution: {integrity: sha512-wkw9yd1kEXOPnvEeEV1Go1MmxtBJL0RR79aOTAApecWFVu7w0NNXNqhcWgvw2YgZDYadliXkl14pa3WXw5jlCQ==}
 
   ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
@@ -115,6 +121,8 @@ packages:
     engines: {node: '>=12'}
 
 snapshots:
+
+  '@types/js-cookie@3.0.6': {}
 
   ansi-regex@5.0.1: {}
 

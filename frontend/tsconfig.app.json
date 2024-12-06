@@ -20,7 +20,15 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    // import
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "#root/*": ["./*"],
+      "@backendtypes": ["./../backend/src/types/LocaleTypes"]
+    }
   },
   "include": ["src"]
 }
