@@ -1,3 +1,4 @@
+import daisyui from "daisyui"
 /** @type {import('tailwindcss').Config} */
 export default {
   mode: "jit",
@@ -16,8 +17,6 @@ export default {
     },
     extend: {},
   },
-  plugins: [
-     require('daisyui'),
-  ],
+  plugins: [ daisyui ],
 }
 

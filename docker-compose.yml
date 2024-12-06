@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-cuetps-data:/data/db
+
+  backend:
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=mongodb://mongo:27017/CuetPS
+      - ORIGIN_URL=http://frontend:8080
+    depends_on:
+      - mongo
+  frontend:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend
+
+volumes:
+  mongo-cuetps-data:
+
