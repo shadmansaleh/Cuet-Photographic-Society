@@ -1,4 +1,5 @@
 import daisyui from "daisyui";
+import themes from "daisyui/src/theming/themes"
 /** @type {import('tailwindcss').Config} */
 export default {
   mode: "jit",
@@ -20,7 +21,7 @@ export default {
     themes: [
       {
         "cuetps-light": {
-          ...require("daisyui/src/theming/themes")["light"],
+          ...themes["light"],
           // primary: "#384D6C",
           // "primary-content": "white",
           // secondary: "#A3C0E9",
@@ -47,7 +48,7 @@ export default {
       },
       {
         "cuetps-dark": {
-          ...require("daisyui/src/theming/themes")["dark"],
+          ...themes["dark"],
           // primary: "oklch(65.69% 0.196 275.75)",
           // secondary: "oklch(42.88% 0.076 282.55)",
           // accent: "oklch(74.51% 0.167 183.61)",
