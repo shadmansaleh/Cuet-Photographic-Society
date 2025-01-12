@@ -3,9 +3,14 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import {connectDB} from "./config/db.ts"
 import cookieParser from "cookie-parser";
 import ErrorHandler from "./middlewares/ErrorHandler";
 import RateLimiter from "./middlewares/RateLimiter";
+
+import authRoutes from './routes/auth';
+import photoRoutes from './routes/photos';
+import exhibitionRoutes from './routes/exhibitions';
 
 
 const app = express();
@@ -24,14 +29,16 @@ app.get("/", (req: Request, res: Response) => {
   res.json({ status: "success" });
 });
 
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/photos', photoRoutes);
+app.use('/api/exhibitions', exhibitionRoutes);
+
 app.use(ErrorHandler);
 
 async function main() {
   const PORT = process.env.PORT ? parseInt(process.env.PORT) : 5000;
-  // const io = new Server(PORT);
-  console.log("Connecting to MongoDB...");
-  await mongoose.connect(process.env.DATABASE_URL as string);
-  console.log("Connected to MongoDB");
+  connectDB()
 
   app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);

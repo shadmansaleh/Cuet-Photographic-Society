@@ -2,11 +2,13 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoCloseOutline } from "react-icons/io5";
+import { useAuth } from '../contexts/AuthContext';
 
 function NavBar() {
   const [_scrollPosition, setScrollPosition] = useState(0);
   const [isSmallWin, setIsSmallWin] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -30,7 +32,7 @@ function NavBar() {
     };
   }, []);
 
-  const navbar_height = 12;
+  // const navbar_height = 12;
   const dark_section = () => {
     // const path = window.location.pathname;
     // if (path !== "/") return false;
@@ -48,6 +50,10 @@ function NavBar() {
     {
       name: "Home",
       link: "/",
+    },
+    {
+      name: "Gallery",
+      link: "/gallery",
     },
     {
       name: "Exhibitions",

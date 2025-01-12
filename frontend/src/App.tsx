@@ -17,6 +17,8 @@ import SignUp from "./pages/visitor/SignUpPage";
 import ForgotPassword from "./pages/visitor/ForgotPasswordPage";
 import NotFound404 from "./pages/Common/NotFound404";
 import Exhibition from "./pages/visitor/ExhibitionPage";
+import Gallery from "./pages/visitor/Gallery";
+import ExhibitionDetails from "./pages/visitor/ExhibitionDetails.tsx";
 
 function App() {
   const [darkMode, setDarkMode] = useDarkMode();
@@ -30,7 +32,9 @@ function App() {
         { index: true, element: <LandingPage /> },
         { path: "login", element: <Login /> },
         { path: "about", element: <AboutUs /> },
+        { path: "gallery", element: <Gallery /> },
         { path: "exhibitions", element: <Exhibition /> },
+        { path: "exhibitions/:id", element: <ExhibitionDetails /> },
         { path: "contact", element: <Contact /> },
         { path: "signup", element: <SignUp /> },
         { path: "forgot_password", element: <ForgotPassword /> },
