@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import type { Exhibition } from '../types';
+import type { Exhibition } from '../../types';
 
 export default function Exhibitions() {
   const [exhibitions, setExhibitions] = useState<Exhibition[]>([]);
