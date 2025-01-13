@@ -1,10 +1,10 @@
-import { useContext } from "react";
-import { AuthContext } from "@/contexts/AuthProvider";
+import { useAuth } from "@/contexts/AuthContext";
 import { Navigate, Outlet } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 import React from "react";
 
 export enum Role {
+  ALL = "all",
   NOAUTH = "no_auth",
   AUTH = "auth",
   USER = "user",
@@ -20,21 +20,22 @@ export function ProtectedRoute({
 }) {
   if (!role) role = Role.AUTH;
   const retAccept = children ? children : <Outlet />;
-  const { auth } = useContext(AuthContext);
+  const { user } = useAuth();
+  if (role === Role.ALL) return retAccept;
   if (role === Role.NOAUTH) {
-    if (auth?.token) return <Navigate to={`${__BASE_URL__}/${auth.role}`} />;
+    if (user !== null) return <Navigate to={`${__BASE_URL__}/`} />;
     return retAccept;
   }
-  if (!auth?.token) {
+  if (!user) {
     enqueueSnackbar("Please login to access this page", { variant: "error" });
     return <Navigate to={`${__BASE_URL__}/login`} />;
   }
   if (role === Role.AUTH) return retAccept;
-  if (auth?.role === role) return retAccept;
+  if (user.role.toString() === role.toString()) return retAccept;
   enqueueSnackbar("You do not have permission to access this page", {
     variant: "error",
   });
-  return <Navigate to={`${__BASE_URL__}/${auth.role}`} />;
+  return <Navigate to={`${__BASE_URL__}/`} />;
 }
 
 export default ProtectedRoute;

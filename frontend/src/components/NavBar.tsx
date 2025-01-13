@@ -2,13 +2,17 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoCloseOutline } from "react-icons/io5";
-// import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 function NavBar() {
   const [_scrollPosition, setScrollPosition] = useState(0);
   const [isSmallWin, setIsSmallWin] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+
+  const isSignedIn = user !== null;
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -64,8 +68,19 @@ function NavBar() {
       link: "/about",
     },
     {
+      name: "Profile",
+      link: "/profile",
+      cond: isSignedIn,
+    },
+    {
       name: "Login",
       link: "/login",
+      cond: !isSignedIn,
+    },
+    {
+      name: "Logout",
+      onClick: () => signOut(),
+      cond: isSignedIn,
     },
   ];
   const active = window.location.pathname;
@@ -97,19 +112,28 @@ function NavBar() {
                 dark_section() ? "text-gray-300" : "text-gray-700"
               }`}
             >
-              {nav_items.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    to={item.link}
-                    className={`hover:underline  btn btn-sm btn-ghost font-normal ${
-                      active === item.link &&
-                      (dark_section() ? "text-pink-500" : "text-pink-600")
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
+              {nav_items.map(
+                (item) =>
+                  item.cond !== false && (
+                    <li key={item.name}>
+                      <button
+                        onClick={
+                          item.onClick
+                            ? item.onClick
+                            : () => {
+                                navigate(item.link);
+                              }
+                        }
+                        className={`hover:underline  btn btn-sm btn-ghost font-normal ${
+                          active === item.link &&
+                          (dark_section() ? "text-pink-500" : "text-pink-600")
+                        }`}
+                      >
+                        {item.name}
+                      </button>
+                    </li>
+                  )
+              )}
             </ul>
           </div>
         )}
@@ -142,19 +166,33 @@ function NavBar() {
                     className={`menu menu-vertical no-animation
                    ${dark_section() ? "text-gray-300" : "text-gray-700"}`}
                   >
-                    {nav_items.map((item) => (
-                      <li key={item.name} onClick={() => setIsMenuOpen(false)}>
-                        <Link
-                          to={item.link}
-                          className={`hover:underline btn btn-ghost font-normal ${
-                            active === item.link &&
-                            (dark_section() ? "text-pink-500" : "text-pink-600")
-                          } `}
-                        >
-                          {item.name}
-                        </Link>
-                      </li>
-                    ))}
+                    {nav_items.map(
+                      (item) =>
+                        item.cond !== false && (
+                          <li
+                            key={item.name}
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            <button
+                              onClick={
+                                item.onClick
+                                  ? item.onClick
+                                  : () => {
+                                      navigate(item.link);
+                                    }
+                              }
+                              className={`hover:underline btn btn-ghost font-normal ${
+                                active === item.link &&
+                                (dark_section()
+                                  ? "text-pink-500"
+                                  : "text-pink-600")
+                              } `}
+                            >
+                              {item.name}
+                            </button>
+                          </li>
+                        )
+                    )}
                   </ul>
                 </div>
               </div>

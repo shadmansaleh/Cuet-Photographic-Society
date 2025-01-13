@@ -1,9 +1,15 @@
+export enum UserRole {
+  USER = "user",
+  ADMIN = "admin",
+}
+
 export interface User {
   id: string;
   email: string;
   name: string;
   bio?: string;
   avatar_url?: string;
+  role: UserRole;
   created_at: string;
 }
 
@@ -24,7 +30,7 @@ export interface Exhibition {
   thumbnail_url: string;
   start_date: string;
   end_date: string;
-  status: 'upcoming' | 'active' | 'past';
+  status: "upcoming" | "active" | "past";
   created_at: string;
 }
 

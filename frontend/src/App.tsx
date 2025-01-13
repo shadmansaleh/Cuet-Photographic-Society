@@ -19,6 +19,7 @@ import NotFound404 from "./pages/Common/NotFound404";
 import Exhibition from "./pages/visitor/ExhibitionPage";
 import Gallery from "./pages/visitor/Gallery";
 import ExhibitionDetails from "./pages/visitor/ExhibitionDetails.tsx";
+import Profile from "./pages/visitor/Profile.tsx";
 
 function App() {
   const [darkMode, setDarkMode] = useDarkMode();
@@ -27,18 +28,29 @@ function App() {
   const AppRoutes = useRoutes([
     {
       path: `${__BASE_URL__}/`,
-      element: <ProtectedRoute role={Role.NOAUTH} />,
+      element: <ProtectedRoute role={Role.ALL} />,
       children: [
         { index: true, element: <LandingPage /> },
-        { path: "login", element: <Login /> },
         { path: "about", element: <AboutUs /> },
         { path: "gallery", element: <Gallery /> },
         { path: "exhibitions", element: <Exhibition /> },
         { path: "exhibitions/:id", element: <ExhibitionDetails /> },
         { path: "contact", element: <Contact /> },
-        { path: "signup", element: <SignUp /> },
         { path: "forgot_password", element: <ForgotPassword /> },
       ],
+    },
+    {
+      path: `${__BASE_URL__}/`,
+      element: <ProtectedRoute role={Role.NOAUTH} />,
+      children: [
+        { path: "login", element: <Login /> },
+        { path: "signup", element: <SignUp /> },
+      ],
+    },
+    {
+      path: `${__BASE_URL__}/`,
+      element: <ProtectedRoute role={Role.USER} />,
+      children: [{ path: "profile", element: <Profile /> }],
     },
     // {
     //   path: `${__BASE_URL__}/user`,
