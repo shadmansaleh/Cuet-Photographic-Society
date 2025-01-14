@@ -14,9 +14,9 @@ const AdminPage = () => {
   useEffect(() => {
     // Temporary hardcoded exhibitions data
     setExhibitions([
-      { _id: "1", number: 1 },
-      { _id: "2", number: 2 },
-      { _id: "3", number: 3 },
+      { _id: "1", number: 1, name: "Nature Photography" },
+      { _id: "2", number: 2, name: "Urban Exploration" },
+      { _id: "3", number: 3, name: "Artistic Vision" },
     ]);
   }, []);
 
@@ -39,11 +39,21 @@ const AdminPage = () => {
       label: "Manage Photos",
       children: <PhotoTable />,
     },
-    ...exhibitions.map((exhibition) => ({
-      key: `exhibition-${exhibition._id}`,
-      label: `Exhibition ${exhibition.number}`,
-      children: <ExhibitionTable exhibitionId={exhibition._id} />,
-    })),
+    {
+      key: "3",
+      label: "Exhibition",
+      children: (
+        <div>
+          {exhibitions.map((exhibition) => (
+            <ExhibitionTable
+              key={exhibition._id}
+              exhibitionId={exhibition._id}
+              exhibitionName={exhibition.name}
+            />
+          ))}
+        </div>
+      ),
+    },
   ];
 
   return (
@@ -57,7 +67,7 @@ const AdminPage = () => {
         Create Exhibition
       </Button>
       <Tabs defaultActiveKey="1" className={styles.tabs} items={tabItems} />
-      
+
       {/* Modal for CreateExhibition */}
       <Modal
         title="Create Exhibition"

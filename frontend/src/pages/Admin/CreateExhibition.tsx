@@ -1,21 +1,27 @@
 import React from "react";
-import { Form, Input, DatePicker, Button, message, Card } from "antd";
+import { Form, Input, DatePicker, Button, message, Card, Upload, Space } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 import axios from "axios";
 import moment, { Moment } from "moment";
 
 interface ExhibitionFormValues {
   title: string;
   deadline: Moment | null;
+  themePhoto: any;
 }
 
 const CreateExhibition: React.FC = () => {
   const [form] = Form.useForm();
 
   const onFinish = async (values: ExhibitionFormValues) => {
+    const formData = new FormData();
+    formData.append("title", values.title);
+    formData.append("deadline", values.deadline!.toISOString());
+    formData.append("themePhoto", values.themePhoto.file);
+
     try {
-      await axios.post("/api/exhibitions", {
-        title: values.title,
-        deadline: values.deadline,
+      await axios.post("/api/exhibitions", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
       message.success("Exhibition created successfully.");
       form.resetFields();
@@ -23,6 +29,17 @@ const CreateExhibition: React.FC = () => {
       console.error("Error creating exhibition:", error);
       message.error("Failed to create exhibition.");
     }
+  };
+
+  const uploadProps = {
+    name: 'file',
+    listType: 'picture',
+    maxCount: 1,
+    accept: 'image/*',
+    beforeUpload: (file: File) => {
+      form.setFieldsValue({ themePhoto: { file } });
+      return false; // Prevent auto upload
+    },
   };
 
   return (
@@ -69,6 +86,18 @@ const CreateExhibition: React.FC = () => {
             }}
             disabledDate={(current) => current && current < moment().endOf("day")}
           />
+        </Form.Item>
+        <Form.Item
+          name="themePhoto"
+          label="Theme Cover Photo"
+          valuePropName="file"
+          rules={[{ required: true, message: "Please upload a theme cover photo!" }]}
+        >
+          <Upload {...uploadProps}>
+            <Button icon={<UploadOutlined />} style={{ width: "100%" }}>
+              Upload Theme Photo
+            </Button>
+          </Upload>
         </Form.Item>
         <Form.Item>
           <Button
