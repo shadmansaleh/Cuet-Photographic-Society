@@ -1,16 +1,19 @@
-import { useState } from 'react';
-import Masonry from 'react-masonry-css';
-import { Heart } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
-import ImageModal from './ImageModal';
-import type { Photo } from '../types';
+import { useState } from "react";
+import Masonry from "react-masonry-css";
+import { Heart } from "lucide-react";
+import { useAuth } from "../contexts/AuthContext";
+import ImageModal from "./ImageModal";
+import type { Photo } from "../types";
 
 interface MasonryGalleryProps {
   photos: Photo[];
   onVote?: (photoId: string) => Promise<void>;
 }
 
-export default function MasonryGallery({ photos, onVote }: MasonryGalleryProps) {
+export default function MasonryGallery({
+  photos,
+  onVote,
+}: MasonryGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const { user } = useAuth();
 
@@ -18,7 +21,7 @@ export default function MasonryGallery({ photos, onVote }: MasonryGalleryProps) 
     default: 4,
     1100: 3,
     700: 2,
-    500: 1
+    500: 1,
   };
 
   return (
@@ -65,8 +68,14 @@ export default function MasonryGallery({ photos, onVote }: MasonryGalleryProps) 
           photos={photos}
           currentIndex={selectedIndex}
           onClose={() => setSelectedIndex(null)}
-          onNext={() => setSelectedIndex(prev => Math.min(prev || 0 + 1, photos.length - 1))}
-          onPrevious={() => setSelectedIndex(prev => Math.max(prev || photos.length - 1, 0))}
+          onNext={() =>
+            setSelectedIndex((prev) =>
+              Math.min((prev || 0) + 1, photos.length - 1)
+            )
+          }
+          onPrevious={() =>
+            setSelectedIndex((prev) => Math.max((prev || photos.length) - 1, 0))
+          }
         />
       )}
     </>
