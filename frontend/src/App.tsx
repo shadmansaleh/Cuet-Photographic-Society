@@ -20,6 +20,10 @@ import Exhibition from "./pages/visitor/ExhibitionPage";
 import Gallery from "./pages/visitor/Gallery";
 import ExhibitionDetails from "./pages/visitor/ExhibitionDetails.tsx";
 import Profile from "./pages/visitor/Profile.tsx";
+import AdminPage from "./pages/Admin/AdminPage.tsx";
+import CreateExhibition from "./pages/Admin/CreateExhibition.tsx";
+import PhotoTable from "./pages/Admin/PhotoTable.tsx";
+import UserTable from "./pages/Admin/UserTable.tsx";
 
 function App() {
   const [darkMode, setDarkMode] = useDarkMode();
@@ -48,43 +52,24 @@ function App() {
       ],
     },
     {
+      path: `${__BASE_URL__}/admin`,
+      // Remove ProtectedRoute for now
+      children: [
+        { index: true, element: <AdminPage /> },
+        { path: "create-exhibition", element: <CreateExhibition /> },
+        { path: "photo-table", element: <PhotoTable /> },
+        { path: "user-table", element: <UserTable /> },
+      ],
+    },
+    
+    {
       path: `${__BASE_URL__}/`,
       element: <ProtectedRoute role={Role.USER} />,
       children: [{ path: "profile", element: <Profile /> }],
     },
-    // {
-    //   path: `${__BASE_URL__}/user`,
-    //   element: (
-    //     <ProtectedRoute role={Role.USER}>{/* <HomePage /> */}</ProtectedRoute>
-    //   ),
-    //   children: [
-    // { index: true, element: <UserDashboard /> },
-    // { path: "dashboard", element: <UserDashboardPage /> },
-    // { path: "search", element: <UserSearchPage /> },
-    // { path: "profile", element: <UserProfilePage /> },
-    // { path: "exhibitions", element: <UserExhibition /> },
-    // { path: "settings", element: <UserSettingsPage /> },
-    //     {
-    //       path: `${__BASE_URL__}/admin`,
-    //       element: (
-    //         <ProtectedRoute role={Role.ADMIN}>
-    //           {/* <HomePage /> */}
-    //         </ProtectedRoute>
-    //       ),
-    //       children: [
-    // { index: true, element: <AdminDashboardPage /> },
-    // { path: "dashboard", element: <AdminDashboardPage /> },
-    // { path: "users", element: <AdminUsersPage /> },
-    // { path: "verify", element: <AdminVerifyPage /> },
-    // { path: "reports", element: <AdminReportsPage /> },
-    // { path: "exhibitions", element: <AdminExhibitionControl /> },
-    // { path: "settings", element: <AdminSettingsPage /> },
-    //       ],
-    //     },
-    //   ],
-    // },
     { path: "*", element: <NotFound404 /> },
   ]);
+  
   return (
     <div className="bg-base-100">
       <NavBar />
