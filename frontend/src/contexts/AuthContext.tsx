@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import type { User } from "../types";
 
@@ -15,6 +16,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
+  const navigator = useNavigate();
 
   useEffect(() => {
     const initializeAuth = async () => {
@@ -85,6 +87,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signOut = async () => {
     localStorage.removeItem("token");
     setUser(null);
+    navigator("/");
   };
 
   const value = {
