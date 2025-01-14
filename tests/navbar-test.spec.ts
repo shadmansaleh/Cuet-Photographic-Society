@@ -25,6 +25,7 @@ test.describe("Navbar", () => {
     await page.getByRole("button", { name: "Sign in" }).click();
 
     await page.getByRole("button", { name: "Home" }).click();
+    await page.getByRole("button", { name: "Home" }).click();
     await expect(page).toHaveURL("http://localhost:3000/");
     await page.getByRole("button", { name: "Gallery" }).click();
     await expect(page).toHaveURL("http://localhost:3000/gallery");
