@@ -1,12 +1,32 @@
-import { Tabs, Button, Modal } from "antd";
-import { useState } from "react";
+// AdminPage.tsx
+import { Tabs, Button, Modal, message } from "antd";
+import { useState, useEffect } from "react";
 import UserTable from "./UserTable";
 import PhotoTable from "./PhotoTable";
 import CreateExhibition from "./CreateExhibition";
+import ExhibitionTable from "./ExhibitionTable";
 import styles from "./AdminPage.module.css";
 
 const AdminPage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [exhibitions, setExhibitions] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Temporary hardcoded exhibitions data
+    setExhibitions([
+      { _id: "1", number: 1 },
+      { _id: "2", number: 2 },
+      { _id: "3", number: 3 },
+    ]);
+  }, []);
+
+  const handleCreateExhibitionClick = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancelModal = () => {
+    setIsModalVisible(false);
+  };
 
   const tabItems = [
     {
@@ -19,15 +39,12 @@ const AdminPage = () => {
       label: "Manage Photos",
       children: <PhotoTable />,
     },
+    ...exhibitions.map((exhibition) => ({
+      key: `exhibition-${exhibition._id}`,
+      label: `Exhibition ${exhibition.number}`,
+      children: <ExhibitionTable exhibitionId={exhibition._id} />,
+    })),
   ];
-
-  const handleCreateExhibitionClick = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleCancelModal = () => {
-    setIsModalVisible(false);
-  };
 
   return (
     <div className={styles.adminPage}>
