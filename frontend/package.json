@@ -8,11 +8,10 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview --host",
-    "test": "playwright test" 
+    "test": "playwright test"
   },
- 
-
   "dependencies": {
+    "@ant-design/icons": "^5.5.2",
     "@types/moment": "^2.13.0",
     "antd": "^5.23.1",
     "axios": "^1.7.8",
