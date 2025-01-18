@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { assert } from "console";
+// import { assert } from "console";
 
 test.describe("Landing page", () => {
   test("verify home page content", async ({ page }) => {
