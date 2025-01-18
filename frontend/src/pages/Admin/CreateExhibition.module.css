@@ -1,0 +1,28 @@
+/* Style for the card container */
+.ant-card {
+    transition: all 0.3s ease;
+  }
+  
+  /* Hover effect for the card */
+  .ant-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Style for form buttons */
+  .ant-btn-primary {
+    transition: all 0.3s ease;
+  }
+  
+  .ant-btn-primary:hover {
+    background-color: #45a049;
+    border-color: #45a049;
+  }
+  
+  /* Add custom font for title */
+  .ant-card-head-title {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #333;
+  }
+  
